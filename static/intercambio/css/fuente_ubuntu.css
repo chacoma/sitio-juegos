@@ -1,0 +1,8 @@
+@media screen {
+@font-face {
+  font-family: 'Ubuntu', serif;
+  font-style: normal;
+  font-weight: normal;
+  src: local('Ubuntu'), url('/static/intercambio/fonts/ubuntu_normal.woff') format('woff');
+}
+}

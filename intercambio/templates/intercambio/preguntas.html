@@ -1,0 +1,165 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+	<title>Preguntas</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'intercambio/css/preguntas.css' %}"/>
+	<link rel="stylesheet" href="{% static 'intercambio/css/jquery-ui.css' %}"/>
+	<link rel="stylesheet" href="{% static 'intercambio/css/font-awesome.css' %}">
+	<!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" /> -->
+	<link rel="stylesheet" href="{% static 'intercambio/css/fuente_ubuntu.css' %}">
+	<script type="text/javascript" src= "{% static 'intercambio/js/jquery.js' %}"> </script>
+	<script type="text/javascript" src= "{% static 'intercambio/js/jquery-ui.js' %}"> </script>
+	<script type="text/javascript" src= "{% static 'intercambio/js/jquery.ui.touch-punch.min.js' %}"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<!-- PREGUNTA E IMAGEN -->
+	<div class="nro-pregunta"> {{Npreg}} </div>
+	<div class="pregunta_texto"> {{texto}} </div>
+	<div class="imagen"><img src= "{% static arch_img %}"/></div>
+
+	<!-- MARCAS -->
+	<div class="marcas"></div>
+
+	<!-- BARRA -->
+	<div class="respuesta">
+		<div id="slider1"></div>
+		<div id="slider1-label"><i class="fa fa-arrow-up" aria-hidden="true"></i>Respuesta</div>
+		<div id="slider1-value"></div>
+		<div id="slider1-unit" ></div>
+	</div>
+
+	<!-- FORMULARIO -->
+
+	<div class="formulario">
+		<form method="post">{% csrf_token %}
+
+			<!-- RESPUESTA lo setea la slider -->
+			<input type="hidden" name="resp" id="resp" value="-1" >
+
+			<!-- CONFIANZA checkboxradios  (visible)-->
+			<div class="confianza">
+				<div class="botones-set">
+			    <label for="radio-0">Baja</label>
+			    <input type="radio" name="conf" id="radio-0" value="0">
+			    <label for="radio-1">Media</label>
+			    <input type="radio" name="conf" id="radio-1" value="1">
+			    <label for="radio-2">Alta</label>
+			    <input type="radio" name="conf" id="radio-2" value="2">
+				</div>
+
+				<div id="botones-label"><i class="fa fa-arrow-up" aria-hidden="true"></i>Confianza</div>
+
+		  </div>
+
+			<!-- esto es para guardar las marcas -->
+			{%for marca in marcas%}
+			<input type="hidden" name="marcas" value="{{marca}}" >
+			{%endfor%}
+
+			<!-- esta es para guardar la respuesta correcta -->
+			<input type="hidden" name="correcta" id="correcta" value="{{resp_correcta}}" >
+
+			<!-- boton RESPONDER (visible)-->
+			<div class="responder">
+				<input id="button" type="submit" value="Responder" >
+			</div>
+
+		</form>
+	</div>
+
+
+</div> <!-- full container -->
+
+</body>
+
+<script>
+
+// slider ----------------------------------------------------------
+$("#slider1").slider({
+	min:{{r1}},
+	max:{{r2}},
+	step:{{step}},
+	range: "min",
+
+
+	slide: function(event, ui){
+			$("#slider1-value").html(ui.value);
+			$("#resp").attr("value", ui.value);
+	},
+
+});
+
+
+$( document ).ready(function() {
+
+	var resp_ini={{resp_ini}};
+	var resp_unit="{{unit}}";
+
+	$("#slider1").slider("option","value",resp_ini);
+	$("#slider1-value").html(resp_ini);
+	$("#slider1-unit").html(resp_unit);
+	$("#resp").attr("value", resp_ini);
+
+	// FUNCIONES PARA HACER LAS MARCAS -----------------
+	{%for marca in marcas%}
+		$('<span class="tick"></span>').css('left', '{{marca}}').appendTo($('.marcas'));
+	{%endfor%}
+
+	//conf inicial de los checkboxradio ------------------
+	var radio_id= "radio-"+"{{conf_ini}}";
+	$( "input[type=radio]" ).checkboxradio();
+	$('input[id='+radio_id+']').attr('checked',true);
+	$('input[id='+radio_id+']').button( "refresh" )
+
+
+
+});
+
+
+// avoid vuelta atras-----------------------------------
+/*
+function noBack(){
+						window.history.forward()
+}
+noBack();
+window.onload = noBack;
+window.onpageshow = function(evt) { if (evt.persisted) noBack() }
+window.onunload = function() { void (0) }
+
+//evita recarga-------------------------------------------
+document.onkeydown = function(){
+    if(window.event && window.event.keyCode == 116){
+     window.event.keyCode = 505;
+		 return false;
+    }
+
+}
+
+*/
+</script>
+
+
+<style>
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+</html>

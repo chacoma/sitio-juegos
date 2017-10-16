@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Intercambio de información</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'intercambio/css/intercambio_index.css' %}"/>
+<link rel="stylesheet" href="{% static 'intercambio/css/font-awesome.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" /> -->
+<link rel="stylesheet" href="{% static 'intercambio/css/fuente_ubuntu.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+<!--
+  <div class="cabecera">
+      <img src="{% static 'intercambio/img/bauer2.jpg' %}">
+      <div class="botones">
+        <a href="/intercambio/registro/"> <button class="boton boton2">Jugar</button> </a>
+        <a href="http://www.google.com"> <button class="boton boton1">Probar</button> </a>
+      </div>
+  </div> -->
+
+  <div class="cabecera">
+    <div class="botones">
+      <a href="/intercambio/registro/"> <button class="boton boton2">Jugar</button> </a>
+      <a href="/intercambio/prueba/"> <button class="boton boton1">Probar</button> </a>
+    </div>
+  </div>
+
+  <div class="titulos">
+      <h1>Intercambio y manejo de información</h1>
+      <h3>Centro Atómico Bariloche</h3>
+      <h2>Departamento de Física estadística e interdisciplinaria</h2>
+  </div>
+
+  <div class="info">
+      <h3>Links</h3>
+      <ul class="enlaces">
+        <a href="/intercambio/reglamento"><li class="fa fa-question-circle" id="vid-exp"> ¿Cómo Jugar?</li></a>
+        <a href="http://fisica.cab.cnea.gov.ar/estadistica/"> <li class="fa fa-gg" aria-hidden="true"> FiEstIn</li></a>
+        <a href="mailto:andres.chacoma@gmail.com"><li class="fa fa-comment-o"> Contacto</li></a>
+        <a href="/"><li class="fa fa-gamepad" aria-hidden="true"> Juegos</li></a>
+      </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

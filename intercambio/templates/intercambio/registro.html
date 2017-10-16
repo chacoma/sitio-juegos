@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'intercambio/css/registro.css' %}">
+<link rel="stylesheet" href="{% static 'intercambio/css/font-awesome.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" /> -->
+<link rel="stylesheet" href="{% static 'intercambio/css/fuente_ubuntu.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="cabecera">
+
+      <!-- <img src="{% static 'intercambio/img/bauer2.jpg' %}"> -->
+  </div>
+
+  <div class="form-container">
+    <form class="formulario" method="POST"> {% csrf_token %}
+      <ol>
+        <li><p>Elejí un alias:</p>{{form.nombre}}</li>
+        <li><p>Tu edad?</p>{{form.edad}}</li>
+        <li><p>Qué estudias?</p> <div class='styled-select select'> {{form.estudio}} </div>  </li>
+
+        <li><input class="boton" type="submit" value="Comenzar" ></li>
+      </ol>
+    </form>
+  </div>
+
+  <div class="salir">
+      <a href="/intercambio"><li class="fa fa-home"></li></a>
+  </div>
+
+</div>
+</body>
+</html>
+
+<style>
+
+</style>
